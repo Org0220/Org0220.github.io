@@ -11,17 +11,14 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
-  <script src="JavaScript/config.js"></script>
-  <!-- The title element that will be updated -->
-  <title id="main_title">Gevorg's Portfolio</title>
+  <title>About - Gevorg Markarov</title>
 </head>
-
 <body class="bg-white dark-mode relative overflow-hidden">
   <div id="particles-js"></div>
   
   <!-- Taskbar -->
   <nav id="taskbar" class="taskbar text-white">
-    <a href="#" class="home-link">Home</a>
+    <a href="index.html" class="home-link">Home</a>
     <div class="nav-items">
         <div class="center-with-button">
             <a href="about.html" class="hover:text-gray-300 transition-colors duration-200">About</a>
@@ -32,37 +29,31 @@
     </div>
   </nav>
   
+  <!-- About Me Content -->
   <div class="flex flex-col items-center justify-center min-h-screen">
-    <div id="header-container" class="px-4 py-5 mt-8 space-x-4">
-      <!-- This heading uses a class that will be updated to reflect config.full_name -->
-      <h1 class="text-8xl font-bold mb-10 full-name">Gevorg Markarov</h1>
-      <h2 class="text-xl mb-3">
-        <span>Tech-fueled journeys, guided by philosophical inquiry</span>
-      </h2>
-      <br>
-      <div class="flex space-x-4">
-        <a href="https://www.linkedin.com/in/shahe-bannis/" target="_blank" class="text-xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out linkedin"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/shahebannis" target="_blank" class="text-xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out github"><i class="fab fa-github"></i></a>
-        <!-- The mailto link will be dynamically updated by script.js -->
-        <a href="mailto:gevorgmarkarov+website@gmail.com" target="_blank" class="text-xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out email"><i class="fas fa-envelope"></i></a>
-      </div>
+    <div id="about-container" class="px-4 py-5 mt-20 space-y-4 max-w-4xl text-center">
+      <h1 class="text-5xl font-bold mb-10">About Me</h1>
+      <!-- Profile image will be dynamically set from config -->
+      <img id="profile_image" src="images/profile_image.jpg" alt="Profile Image" class="w-40 h-40 rounded-full mx-auto">
+      <!-- The about description container -->
+      <p id="about_me" class="text-lg mt-5"></p>
     </div>
   </div>
   
   <script>
-    // Your dark mode and scroll behavior scripts...
+    // Dark Mode and scroll behavior (same as the other pages)
     document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("dark-mode");
       document.getElementById("dark-mode-toggle").innerText = "☀️";
     });
-
+  
     document.getElementById("dark-mode-toggle").addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-
+  
       const toggleBtn = document.getElementById("dark-mode-toggle");
       const taskbar = document.getElementById("taskbar");
       const isDarkModeOn = document.body.classList.contains("dark-mode");
-
+  
       toggleBtn.innerText = isDarkModeOn ? "☀️" : "🌓";
       
       if (isDarkModeOn) {
@@ -71,10 +62,10 @@
         taskbar.classList.add("light-mode");
       }
     });
-
+  
     let lastScrollTop = 0;
     const taskbar = document.getElementById("taskbar");
-
+  
     window.addEventListener("scroll", () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       if (scrollTop > lastScrollTop) {
@@ -85,10 +76,9 @@
       lastScrollTop = scrollTop;
     });
   </script>
-
-  <!-- Include the centralized script that applies config values -->
   
-  <!-- External particles effect script -->
+  <!-- Include the centralized config script -->
+  <script src="JavaScript/config.js" defer></script>
   <script type="text/javascript" src="JavaScript/particles.js"></script>
 </body>
 </html>

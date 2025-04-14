@@ -1,0 +1,239 @@
+/* MARKDOWN FILES */
+
+.markdown-container img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  .markdown-container h2 {
+    font-weight: bold;
+  }
+
+  .markdown-container ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+  }
+
+  /* PARTICLE EFFECT */
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  /* DARKMODE */
+  /* Add necessary dark mode styles for the footer */
+  .dark-mode .bg-white.p-4.rounded.shadow-md.transition-colors.duration-200.hover\:bg-gray-100:hover {
+    background-color: #333333;
+  }
+  .dark-mode {
+    background-color: #1a1a1a;
+  }
+  .dark-mode footer,
+  .dark-mode footer .text-gray-600 {
+    color: #f8f8f8;
+  }
+  .dark-mode .text-white,
+  .dark-mode .text-black,
+  .dark-mode .text-gray-900,
+  .dark-mode h1,
+  .dark-mode h2,
+  .dark-mode h3,
+  .dark-mode h4,
+  .dark-mode p,
+  .dark-mode label,
+  .dark-mode .bg-white .card-content,
+  .dark-mode .bg-white div {
+    color: #f8f8f8;
+  }
+  .dark-mode .bg-white {
+    background-color: #1a1a1a;
+  }
+  .dark-mode .shadow-md {
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(255, 255, 255, 0.06);
+  }
+
+  /* Website wide highlight */
+  ::selection {
+    background-color: #f39c12;
+    color: black;
+  }
+
+  .dark-mode ::selection {
+    background-color: #f39c12;
+    color: white;
+  }
+
+
+  /* TASKBAR */
+  /* Styles for the translucent, sticky taskbar */
+  .taskbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    z-index: 1000;
+    transition: top 0.3s, background-color 0.3s;
+  }
+
+  .taskbar.hidden {
+    top: -100px; /* Adjust this value to ensure the taskbar is completely hidden */
+  }
+
+  /* Light mode styles for the taskbar */
+  .taskbar.light-mode {
+    background: rgba(255, 255, 255, 0.6);
+    color: black;
+  }
+
+  .taskbar .nav-items {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .taskbar .center-with-button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .taskbar .home-link {
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: color 0.3s;
+    animation: slide-in 1s forwards;
+  }
+
+  .taskbar .home-link:hover {
+    color: #f39c12; /* Change this color to whatever you'd like */
+  }
+
+  .taskbar .nav-items a {
+    transition: color 0.3s;
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slide-in 1s forwards;
+  }
+
+  .taskbar .nav-items a:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .taskbar .nav-items a:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .taskbar .nav-items a:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  .taskbar .nav-items a:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes slide-in {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+/* PROJECT BOXES */
+
+  /* Styles for the project boxes */
+  .project-box {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  .project-box:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark-mode .project-box {
+    background: #333;
+    color: #f8f8f8;
+  }
+
+/* SCROLL-BAR */
+/* WebKit (Chrome, Safari, Edge) */
+html::-webkit-scrollbar {
+  width: 5px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #f39c12;
+  border-radius: 20px;
+  border: 3px solid rgba(255, 166, 0, 0);
+}
+
+html::-webkit-scrollbar-track {
+  background: #33333300;
+}
+
+/* ABOUT ME PAGE */
+.about-me-div {
+  margin-top: -35px;
+}
+
+.not-taskbar {
+  color: #f39c12;
+}
+
+.not-taskbar {
+  color: #f39c12;
+}
+
+.not-taskbar {
+  color: #f39c12;
+}
+
+/* BLOGS */
+
+.blog {
+  text-align: center;
+}
+
+/* CONTACT */
+input {
+  background-color: #eee;
+  color: #333;
+  padding: 12px;
+  font-size: 18px;
+}
+
+.dark-mode input {
+  background-color: white;
+}
+
+textarea {
+  background-color: #eee;
+  padding: 12px;
+  font-size: 18px;
+}
+
+.dark-mode textarea {
+  background-color: white;
+}
+
+.contact {
+  background-color: #f39c12;
+}
+
+.contact:hover {
+  background-color: #c9810f;
+}

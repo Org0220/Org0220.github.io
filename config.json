@@ -1,0 +1,17 @@
+{
+    "web_title": "Gevorg's Protfolio",
+    "full_name": "Gevorg Markarov",
+    "profile_image": "images/profile.png",
+    "about_me": "I am a software engineer with a passion for web development and a keen interest in artificial intelligence. I enjoy creating innovative solutions that enhance user experiences and drive business success.",
+    "contact_email": "gevorgmarkarov.w+website@gmail.com",
+    "projects": [
+        {
+            "title": "Project Title",
+            "image": "project_images/project_image.png",
+            "description": "Project description goes here.",
+            "link": "https://github.com/yourusername/project-link",
+            "detailed_description": "This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented. This section can be expanded to provide a comprehensive overview of the project.",
+            "references": []
+        }
+    ]
+}

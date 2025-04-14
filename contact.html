@@ -11,9 +11,9 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
-  <script src="JavaScript/config.js"></script>
-  <!-- The title element that will be updated -->
-  <title id="main_title">Gevorg's Portfolio</title>
+
+  <!-- You could set a page-specific title here or update it dynamically if desired -->
+  <title id="main_title">Contact - Gevorg Markarov</title>
 </head>
 
 <body class="bg-white dark-mode relative overflow-hidden">
@@ -21,7 +21,7 @@
   
   <!-- Taskbar -->
   <nav id="taskbar" class="taskbar text-white">
-    <a href="#" class="home-link">Home</a>
+    <a href="index.html" class="home-link">Home</a>
     <div class="nav-items">
         <div class="center-with-button">
             <a href="about.html" class="hover:text-gray-300 transition-colors duration-200">About</a>
@@ -31,38 +31,50 @@
         <button id="dark-mode-toggle" class="ml-4 p-2 text-white rounded shadow-md">☀️</button>
     </div>
   </nav>
-  
+
   <div class="flex flex-col items-center justify-center min-h-screen">
-    <div id="header-container" class="px-4 py-5 mt-8 space-x-4">
-      <!-- This heading uses a class that will be updated to reflect config.full_name -->
-      <h1 class="text-8xl font-bold mb-10 full-name">Gevorg Markarov</h1>
-      <h2 class="text-xl mb-3">
-        <span>Tech-fueled journeys, guided by philosophical inquiry</span>
-      </h2>
-      <br>
-      <div class="flex space-x-4">
-        <a href="https://www.linkedin.com/in/shahe-bannis/" target="_blank" class="text-xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out linkedin"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/shahebannis" target="_blank" class="text-xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out github"><i class="fab fa-github"></i></a>
-        <!-- The mailto link will be dynamically updated by script.js -->
-        <a href="mailto:gevorgmarkarov+website@gmail.com" target="_blank" class="text-xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out email"><i class="fas fa-envelope"></i></a>
-      </div>
+    <div id="contact-container" class="px-4 py-5 mt-20 space-y-4 max-w-4xl text-center">
+      <h1 class="text-5xl font-bold mb-10">Contact Me</h1>
+      <p class="text-lg mb-3">Feel free to reach out with any questions or opportunities to collaborate!</p>
+      <p class="text-lg mb-3">
+        Contact Form is currently not operational. Please send an email 
+        <!-- The href here will be updated using the config -->
+        <a href="mailto:placeholder@example.com" class="not-taskbar">BY CLICKING HERE</a>
+      </p>
+      <form action="mailto:placeholder@example.com" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <div>
+          <label for="name" class="block text-lg font-medium">Name</label>
+          <input type="text" id="name" name="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        </div>
+        <div>
+          <label for="email" class="block text-lg font-medium">Email</label>
+          <input type="email" id="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        </div>
+        <div>
+          <label for="message" class="block text-lg font-medium">Message</label>
+          <textarea id="message" name="message" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required></textarea>
+        </div>
+        <div>
+          <button type="submit" class="contact w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Send</button>
+        </div>
+      </form>
     </div>
   </div>
-  
+
   <script>
-    // Your dark mode and scroll behavior scripts...
+    // Dark Mode and scroll behavior scripts remain the same as in index.html
     document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("dark-mode");
       document.getElementById("dark-mode-toggle").innerText = "☀️";
     });
-
+  
     document.getElementById("dark-mode-toggle").addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-
+  
       const toggleBtn = document.getElementById("dark-mode-toggle");
       const taskbar = document.getElementById("taskbar");
       const isDarkModeOn = document.body.classList.contains("dark-mode");
-
+  
       toggleBtn.innerText = isDarkModeOn ? "☀️" : "🌓";
       
       if (isDarkModeOn) {
@@ -71,10 +83,10 @@
         taskbar.classList.add("light-mode");
       }
     });
-
+  
     let lastScrollTop = 0;
     const taskbar = document.getElementById("taskbar");
-
+  
     window.addEventListener("scroll", () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       if (scrollTop > lastScrollTop) {
@@ -85,10 +97,9 @@
       lastScrollTop = scrollTop;
     });
   </script>
-
-  <!-- Include the centralized script that applies config values -->
   
-  <!-- External particles effect script -->
+  <!-- Include the centralized config script -->
+  <script src="JavaScript/config.js" defer></script>
   <script type="text/javascript" src="JavaScript/particles.js"></script>
 </body>
 </html>
