@@ -2,7 +2,7 @@ const config = {
     web_title: "Gevorg's Protfolio",
     full_name: "Gevorg Markarov",
     profile_image: "images/profile_image.jpg",
-    about_me: "I am a software engineer with a passion for web development and a keen interest in artificial intelligence. I enjoy creating innovative solutions that enhance user experiences and drive business success.",
+    about_me: `I am a software engineer with a passion for web development and a keen interest in artificial intelligence. I enjoy creating innovative solutions that enhance user experiences and drive business success.`,
     contact_email: "gevorgmarkarov.w+website@gmail.com",
     github: "https://github.com/Org0220",
     linkedin: "https://www.linkedin.com/in/gevorg-markarov/",
@@ -39,15 +39,12 @@ const config = {
             detailed_description: "This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.This is a detailed description of the project. It includes information about the technologies used, the challenges faced, and the solutions implemented.",
             references: []
         },
-
-
     ]
 };
-document.addEventListener('DOMContentLoaded', () => {
-    // Immediately execute since the script tag is at the end of body
 
-
-    console.log("Configuration loaded:", config);
+// Function to initialize all dynamic content from config
+function initializeConfigValues() {
+    console.log("Initializing configuration values...");
 
     // Update the page title if the element exists
     const titleElem = document.getElementsByTagName('title')[0];
@@ -60,10 +57,31 @@ document.addEventListener('DOMContentLoaded', () => {
         el.innerText = config.full_name;
     });
 
-    // Update mailto links to use the config email
-    document.querySelectorAll("a[href^='mailto:']").forEach(anchor => {
+    // Update all social media links 
+    document.querySelectorAll('a.github').forEach(anchor => {
+        anchor.href = config.github;
+    });
+    document.querySelectorAll('a.linkedin').forEach(anchor => {
+        anchor.href = config.linkedin;
+    });
+    document.querySelectorAll('a.email').forEach(anchor => {
         anchor.href = "mailto:" + config.contact_email;
     });
+
+    // Update all mailto links
+    document.querySelectorAll("a[href^='mailto:']").forEach(anchor => {
+        anchor.href = "mailto:" + config.contact_email;
+        // If the text content is an email address, update it too
+        if (anchor.textContent.includes('@')) {
+            anchor.textContent = config.contact_email;
+        }
+    });
+
+    // Update contact form action if it exists
+    const contactForm = document.querySelector('form[action^="mailto:"]');
+    if (contactForm) {
+        contactForm.action = "mailto:" + config.contact_email;
+    }
 
     // Update About page text if present
     const aboutElem = document.getElementById("about_me");
@@ -76,17 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileImg) {
         profileImg.src = config.profile_image;
     }
+}
 
-    // Update GitHub and LinkedIn links using querySelectorAll
-    document.querySelectorAll('a.github').forEach(anchor => {
-        anchor.href = config.github;
-    });
-    document.querySelectorAll('a.linkedin').forEach(anchor => {
-        anchor.href = config.linkedin;
-    });
-
-
-
-
-
-});
+// Run initialization when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initializeConfigValues);

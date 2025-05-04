@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" />
   <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/74209018?v=4" />
   <link rel="stylesheet" href="style.css" />
-  <title>Shahe Bannis - Projects</title>
+  <!-- Title will be updated by config.js -->
+  <title>Projects</title>
   <style>
     /* Transition styles for swiping in */
     .projects-container {
@@ -115,7 +116,7 @@
       <div class="center-with-button">
         <a href="about.html" class="hover:text-gray-300 transition-colors duration-200">About</a>
         <a href="projects.html" class="hover:text-gray-300 transition-colors duration-200">Projects</a>
-        <a href="index.html" class="hover:text-gray-300 transition-colors duration-200">Contact</a>
+        <a href="contact.html" class="hover:text-gray-300 transition-colors duration-200">Contact</a>
       </div>
       <button id="dark-mode-toggle" class="ml-4 p-2 text-white rounded shadow-md">☀️</button>
     </div>
@@ -145,30 +146,35 @@
   <!-- Configuration and Projects Script -->
   <script src="JavaScript/config.js"></script>
   <script>
-    // This code assumes "config" is already defined in config.js
     document.addEventListener('DOMContentLoaded', () => {
       const projectsList = document.getElementById('projects-list');
+      
       // Clear the list
       projectsList.innerHTML = '';
 
       // Create each project card with a click listener for the details modal.
-      config.projects.forEach(project => {
-        const projectCard = document.createElement('div');
-        projectCard.className = 'project-card';
-        projectCard.innerHTML = `
-          ${project.image ? `<img src="${project.image}" alt="${project.title}" class="w-full rounded mb-2">` : ''}
-          <h2 class="text-xl font-bold">${project.title}</h2>
-          <p>${project.description}</p>
-          <a href="${project.link}" target="_blank" class="project-link">View Project</a>
-        `;
-        
-        // When the card is clicked, show the details panel.
-        projectCard.addEventListener('click', () => {
-          showProjectDetails(project);
+      // This now uses the config object defined in config.js
+      if (config && config.projects) {
+        config.projects.forEach(project => {
+          const projectCard = document.createElement('div');
+          projectCard.className = 'project-card';
+          projectCard.innerHTML = `
+            ${project.image ? `<img src="${project.image}" alt="${project.title}" class="w-full rounded mb-2">` : ''}
+            <h2 class="text-xl font-bold">${project.title}</h2>
+            <p>${project.description}</p>
+            <a href="${project.link}" target="_blank" class="project-link">View Project</a>
+          `;
+          
+          // When the card is clicked, show the details panel.
+          projectCard.addEventListener('click', () => {
+            showProjectDetails(project);
+          });
+          
+          projectsList.appendChild(projectCard);
         });
-        
-        projectsList.appendChild(projectCard);
-      });
+      } else {
+        console.error("Config object or projects array not found");
+      }
     });
 
     // Function to show the details modal with project information
@@ -195,5 +201,42 @@
       });
     });
   </script>
+  <script>
+    // Dark Mode and scroll behavior scripts
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("dark-mode");
+      document.getElementById("dark-mode-toggle").innerText = "☀️";
+    });
+  
+    document.getElementById("dark-mode-toggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+  
+      const toggleBtn = document.getElementById("dark-mode-toggle");
+      const taskbar = document.getElementById("taskbar");
+      const isDarkModeOn = document.body.classList.contains("dark-mode");
+  
+      toggleBtn.innerText = isDarkModeOn ? "☀️" : "🌓";
+      
+      if (isDarkModeOn) {
+        taskbar.classList.remove("light-mode");
+      } else {
+        taskbar.classList.add("light-mode");
+      }
+    });
+  
+    let lastScrollTop = 0;
+    const taskbar = document.getElementById("taskbar");
+  
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        taskbar.classList.add("hidden");
+      } else {
+        taskbar.classList.remove("hidden");
+      }
+      lastScrollTop = scrollTop;
+    });
+  </script>
+  
 </body>
 </html>

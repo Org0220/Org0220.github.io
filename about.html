@@ -11,7 +11,8 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
-  <title>About - Gevorg Markarov</title>
+  <!-- Title will be updated dynamically -->
+  <title>About</title>
 </head>
 <body class="bg-white dark-mode relative overflow-hidden">
   <div id="particles-js"></div>
@@ -33,10 +34,23 @@
   <div class="flex flex-col items-center justify-center min-h-screen">
     <div id="about-container" class="px-4 py-5 mt-20 space-y-4 max-w-4xl text-center">
       <h1 class="text-5xl font-bold mb-10">About Me</h1>
-      <!-- Profile image will be dynamically set from config -->
-      <img id="profile_image" src="images/profile_image.jpg" alt="Profile Image" class="w-40 h-40 rounded-full mx-auto">
-      <!-- The about description container -->
+      <!-- Profile image placeholder - will be set by config.js -->
+      <img id="profile_image" src="#" alt="Profile Image" class="w-40 h-40 rounded-full mx-auto">
+      <!-- About me text placeholder - will be set by config.js -->
       <p id="about_me" class="text-lg mt-5"></p>
+      
+      <!-- Social links with classes for dynamic updating -->
+      <div class="flex justify-center space-x-6 mt-6">
+        <a href="#" target="_blank" class="text-2xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out linkedin">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="#" target="_blank" class="text-2xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out github">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="#" target="_blank" class="text-2xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
     </div>
   </div>
   
