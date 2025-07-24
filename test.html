@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h1 class="hero-title">Loading...</h1>
+    <p class="hero-subtitle">Loading...</p>
+    
+    <script src="js/info.js"></script>
+    <script>
+        console.log('personalInfo:', personalInfo);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            
+            console.log('Hero title element:', heroTitle);
+            console.log('Hero subtitle element:', heroSubtitle);
+            
+            if (heroTitle && personalInfo) {
+                heroTitle.innerHTML = `${personalInfo.hero.greeting} <span style="color: orange;">${personalInfo.personal.fullName}</span>`;
+                console.log('Title set');
+            }
+            
+            if (heroSubtitle && personalInfo) {
+                heroSubtitle.textContent = personalInfo.personal.title;
+                console.log('Subtitle set');
+            }
+        });
+    </script>
+</body>
+</html>

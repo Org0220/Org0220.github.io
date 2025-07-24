@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Gevorg Markarov</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>GM</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="cv.html" class="nav-link active">CV</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CV Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1 class="page-title">Curriculum Vitae</h1>
+            <p class="page-subtitle">Complete overview of my education, experience, and skills</p>
+            <div class="cv-actions">
+                <button onclick="window.print()" class="btn btn-primary">
+                    <i class="fas fa-print"></i> Print CV
+                </button>
+                <a href="#" class="btn btn-secondary" onclick="downloadCV()">
+                    <i class="fas fa-download"></i> Download PDF
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Content -->
+    <section class="cv-content">
+        <div class="container">
+            <div class="cv-paper">
+                <!-- Header -->
+                <div class="cv-header">
+                    <div class="cv-name">
+                        <h1>GEVORG MARKAROV</h1>
+                        <p class="cv-title">Software Developer & Computer Science Student</p>
+                    </div>
+                    <div class="cv-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>4470 Boulevard Lévesque Ouest, Laval, H7W 5M8</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(514) 451-0803</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>gevorgmarkarov.w@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <span>linkedin.com/in/gevorg-markarov-bbb4b1228/</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <span>github.com/Org0220</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="cv-section">
+                    <h2 class="cv-section-title">SUMMARY</h2>
+                    <p>
+                        I've always been interested in solving algorithmic problems and learning various programming tools from a young age. 
+                        Following my passion, I pursued computer science at both Vanier and Concordia to further develop my skills. 
+                        Despite the progress, my eagerness to learn and acquire more experience in the field persists. 
+                        Consequently, my current goal is to secure an internship where I can participate in interesting projects and continue expanding my knowledge.
+                    </p>
+                </div>
+
+                <!-- Education -->
+                <div class="cv-section">
+                    <h2 class="cv-section-title">EDUCATION</h2>
+                    <div class="cv-item">
+                        <div class="cv-item-header">
+                            <h3>BCompSc | Concordia University</h3>
+                            <span class="cv-date">2023 – Present</span>
+                        </div>
+                        <p><strong>Computer Science</strong> | GPA: 3.84</p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-header">
+                            <h3>Diploma of Collegial Studies | Vanier College</h3>
+                            <span class="cv-date">2020 – 2023</span>
+                        </div>
+                        <p><strong>Computer Science Technology</strong></p>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="cv-section">
+                    <h2 class="cv-section-title">EXPERIENCE</h2>
+                    <div class="cv-item">
+                        <div class="cv-item-header">
+                            <h3>DevOps Developer Intern | MDA Space</h3>
+                            <span class="cv-date">September 2024 – Present</span>
+                        </div>
+                        <p>
+                            Developing automation tools using Jenkins, Docker containers and Python scripts. Managing Linux servers, 
+                            deploying applications, dealing with security protocols and certifications. Creating VBA scripts for 
+                            Microsoft based UIs like excel forms.
+                        </p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-header">
+                            <h3>Web Developer Intern | Shooga Marketing</h3>
+                            <span class="cv-date">January 2023 – May 2023</span>
+                        </div>
+                        <p>
+                            Developing a web application called Tabclix: PWA made to create business profiles with their portfolio, 
+                            contacts and other different information using React.js. They can be shared using their NFC business cards. 
+                            You can find more here: <a href="https://tabclix.com/" target="_blank">https://tabclix.com/</a>
+                        </p>
+                        <p>
+                            Laravel PHP: I optimized their API that connects Toronto's E-bike database to a SendInBlue 
+                            (Now it's called Brevo) account. Its running time decreased from months to a bit more than a day.
+                        </p>
+                    </div>
+                    <div class="cv-item">
+                        <div class="cv-item-header">
+                            <h3>Game Developer | John Abbott</h3>
+                            <span class="cv-date">October 2022 – May 2023</span>
+                        </div>
+                        <p>
+                            Developing 2 games on Unity engine for John Abbott's Biology and Chemistry department for student 
+                            evaluation purposes using Firebase and SQLite to store data. I created one of the games almost fully 
+                            myself and for the second one developed one of the 3 levels.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div class="cv-section">
+                    <h2 class="cv-section-title">PROJECTS</h2>
+                    <div class="cv-projects">
+                        <div class="cv-project">
+                            <h4>1. Tissue classifier</h4>
+                            <p>Self Supervised Learning model classifying types of tissue | BYOL, PyTorch</p>
+                        </div>
+                        <div class="cv-project">
+                            <h4>2. Facial Expression Classifier</h4>
+                            <p>AI project involving image recognition and neural networks | CNN, Sklearn</p>
+                        </div>
+                        <div class="cv-project">
+                            <h4>3. Anti Phishing Academy</h4>
+                            <p>Webapp for educating employees on phishing attacks | Machine Learning | JacHacks Winner: 
+                               <a href="https://devpost.com/software/anti-phishing-academy" target="_blank">devpost.com/software/anti-phishing-academy</a></p>
+                        </div>
+                        <div class="cv-project">
+                            <h4>4. StalkStocks</h4>
+                            <p>Shows National Bank exchange statistics in real time | Plotly.js | ConuHacks VIII</p>
+                        </div>
+                        <div class="cv-project">
+                            <h4>5. Smart home device</h4>
+                            <p>Raspberry Pi, Python</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="cv-section">
+                    <h2 class="cv-section-title">SKILLS</h2>
+                    <div class="cv-skills">
+                        <div class="skill-category">
+                            <h4>Languages</h4>
+                            <p>English, French, Armenian and Russian</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Programming Languages</h4>
+                            <p>Java, C#, HTML, CSS, JavaScript, PHP, Python, SQL, C, Clojure</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Frameworks & Technologies</h4>
+                            <p>Node JS (Basics), Laravel, React JS, Jenkins, Docker, Unity, Firebase, SQLite</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Tools & Methodologies</h4>
+                            <p>Android Studio, Unity, VS Code, Git, Agile, Scrum and Waterfall methodologies</p>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Core Competencies</h4>
+                            <p>Strong understanding of different algorithms, data structures and code optimization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Gevorg Markarov. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/info.js"></script>
+    <script src="js/dataHandler.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        function downloadCV() {
+            // Create a temporary link to trigger download of the current page as PDF
+            // Note: This is a placeholder. In a real implementation, you'd have a PDF file or use a PDF generation service
+            alert('PDF download functionality would be implemented here. You can use the Print option to save as PDF.');
+        }
+    </script>
+</body>
+</html>

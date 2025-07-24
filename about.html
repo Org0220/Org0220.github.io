@@ -1,98 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous">
-  <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/74209018?v=4">
-  <link rel="stylesheet" href="style.css">
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
-  <!-- Title will be updated dynamically -->
-  <title>About</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Gevorg Markarov</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-white dark-mode relative overflow-hidden">
-  <div id="particles-js"></div>
-  
-  <!-- Taskbar -->
-  <nav id="taskbar" class="taskbar text-white">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="nav-items">
-        <div class="center-with-button">
-            <a href="about.html" class="hover:text-gray-300 transition-colors duration-200">About</a>
-            <a href="projects.html" class="hover:text-gray-300 transition-colors duration-200">Projects</a>
-            <a href="contact.html" class="hover:text-gray-300 transition-colors duration-200">Contact</a>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>GM</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="cv.html" class="nav-link">CV</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
-        <button id="dark-mode-toggle" class="ml-4 p-2 text-white rounded shadow-md">☀️</button>
-    </div>
-  </nav>
-  
-  <!-- About Me Content -->
-  <div class="flex flex-col items-center justify-center min-h-screen">
-    <div id="about-container" class="px-4 py-5 mt-20 space-y-4 max-w-4xl text-center">
-      <h1 class="text-5xl font-bold mb-10">About Me</h1>
-      <!-- Profile image placeholder - will be set by config.js -->
-      <img id="profile_image" src="#" alt="Profile Image" class="w-40 h-40 rounded-full mx-auto">
-      <!-- About me text placeholder - will be set by config.js -->
-      <p id="about_me" class="text-lg mt-5"></p>
-      
-      <!-- Social links with classes for dynamic updating -->
-      <div class="flex justify-center space-x-6 mt-6">
-        <a href="#" target="_blank" class="text-2xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out linkedin">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="#" target="_blank" class="text-2xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out github">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="#" target="_blank" class="text-2xl text-black hover:text-pink-600 transition-colors duration-200 ease-in-out email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-  
-  <script>
-    // Dark Mode and scroll behavior (same as the other pages)
-    document.addEventListener("DOMContentLoaded", () => {
-      document.body.classList.add("dark-mode");
-      document.getElementById("dark-mode-toggle").innerText = "☀️";
-    });
-  
-    document.getElementById("dark-mode-toggle").addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-  
-      const toggleBtn = document.getElementById("dark-mode-toggle");
-      const taskbar = document.getElementById("taskbar");
-      const isDarkModeOn = document.body.classList.contains("dark-mode");
-  
-      toggleBtn.innerText = isDarkModeOn ? "☀️" : "🌓";
-      
-      if (isDarkModeOn) {
-        taskbar.classList.remove("light-mode");
-      } else {
-        taskbar.classList.add("light-mode");
-      }
-    });
-  
-    let lastScrollTop = 0;
-    const taskbar = document.getElementById("taskbar");
-  
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > lastScrollTop) {
-        taskbar.classList.add("hidden");
-      } else {
-        taskbar.classList.remove("hidden");
-      }
-      lastScrollTop = scrollTop;
-    });
-  </script>
-  
-  <!-- Include the centralized config script -->
-  <script src="JavaScript/config.js" defer></script>
-  <script type="text/javascript" src="JavaScript/particles.js"></script>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1 class="page-title">About Me</h1>
+            <p class="page-subtitle">Get to know more about my journey and passion for technology</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <div class="about-section">
+                        <h2>My Story</h2>
+                        <p>
+                            I've always been interested in solving algorithmic problems and learning various programming tools from a young age. 
+                            Following my passion, I pursued computer science at both Vanier and Concordia to further develop my skills. 
+                            Despite the progress, my eagerness to learn and acquire more experience in the field persists.
+                        </p>
+                        <p>
+                            Currently, my goal is to secure an internship where I can participate in interesting projects and continue expanding my knowledge. 
+                            I'm particularly drawn to the intersection of technology and problem-solving, whether it's through DevOps automation, 
+                            web development, or machine learning applications.
+                        </p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Languages</h2>
+                        <div class="languages">
+                            <div class="language-item">
+                                <i class="fas fa-globe"></i>
+                                <span>English (Fluent)</span>
+                            </div>
+                            <div class="language-item">
+                                <i class="fas fa-globe"></i>
+                                <span>French (Fluent)</span>
+                            </div>
+                            <div class="language-item">
+                                <i class="fas fa-globe"></i>
+                                <span>Armenian (Native)</span>
+                            </div>
+                            <div class="language-item">
+                                <i class="fas fa-globe"></i>
+                                <span>Russian (Conversational)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-info">
+                    <div class="info-card">
+                        <h3>Personal Information</h3>
+                        <div class="info-item">
+                            <i class="fas fa-user"></i>
+                            <span><strong>Name:</strong> Gevorg Markarov</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><strong>Location:</strong> Laval, Quebec, Canada</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><strong>Email:</strong> gevorgmarkarov.w@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span><strong>Phone:</strong> (514) 451-0803</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Education</h3>
+                        <div class="education-item">
+                            <h4>Bachelor of Computer Science</h4>
+                            <p><strong>Concordia University</strong> (2023 - Present)</p>
+                            <p>GPA: 3.84</p>
+                        </div>
+                        <div class="education-item">
+                            <h4>DEC in Computer Science Technology</h4>
+                            <p><strong>Vanier College</strong> (2020 - 2023)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section class="interests">
+        <div class="container">
+            <h2 class="section-title">Interests & Methodologies</h2>
+            <div class="interests-grid">
+                <div class="interest-item">
+                    <i class="fas fa-brain"></i>
+                    <h3>Algorithm Design</h3>
+                    <p>Strong understanding of different algorithms, data structures and code optimization</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>Agile Development</h3>
+                    <p>Familiar with Agile, Scrum and Waterfall methodologies</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-robot"></i>
+                    <h3>Machine Learning</h3>
+                    <p>Experience with AI projects including image recognition and neural networks</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Game Development</h3>
+                    <p>Unity engine development for educational and entertainment purposes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Gevorg Markarov. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/info.js"></script>
+    <script src="js/dataHandler.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

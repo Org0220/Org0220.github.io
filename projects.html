@@ -1,242 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- TailwindCSS and Font Awesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" />
-  <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/74209018?v=4" />
-  <link rel="stylesheet" href="style.css" />
-  <!-- Title will be updated by config.js -->
-  <title>Projects</title>
-  <style>
-    /* Transition styles for swiping in */
-    .projects-container {
-      opacity: 0;
-      transform: translateX(100%);
-      animation: slide-in 1s forwards;
-    }
-    @keyframes slide-in {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    .project-card {
-      background: white;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      padding: 1rem;
-      cursor: pointer;
-      margin-bottom: 1rem;
-    }
-    .dark-mode .project-card {
-      background-color: #1a1a1a;
-      color: #f8f8f8;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-    }
-    .project-link {
-      color: #f39c12;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .project-link:hover {
-      color: #e67e22;
-    }
-    /* Modal styles for details panel */
-    #project-details-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-    }
-    #project-details-modal.hidden {
-      display: none;
-    }
-    .modal-content {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-      position: relative;
-      width: 90%;
-      max-width: 600px;
-      max-height: 80vh;       /* Limit modal height to 80% of viewport */
-      overflow-y: auto;       /* Enable vertical scrolling if content overflows */
-      
-      /* Firefox scrollbar styling */
-      scrollbar-color: #e67e22 orange; /* thumb color and track color */
-      scrollbar-width: thin;
-    }
-    .dark-mode .modal-content {
-      background: #1a1a1a;
-      color: #f8f8f8;
-    }
-    .modal-close {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.75rem;
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: inherit;
-    }
-    /* Webkit scrollbar styling */
-    .modal-content::-webkit-scrollbar {
-      width: 10px;
-    }
-    .modal-content::-webkit-scrollbar-track {
-      background: orange;
-    }
-    .modal-content::-webkit-scrollbar-thumb {
-      background-color: #e67e22;
-      border-radius: 5px;
-      border: 2px solid orange;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Gevorg Markarov</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-white dark-mode relative">
-  <div id="particles-js"></div>
-  
-  <!-- Taskbar -->
-  <nav id="taskbar" class="taskbar text-white">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="nav-items">
-      <div class="center-with-button">
-        <a href="about.html" class="hover:text-gray-300 transition-colors duration-200">About</a>
-        <a href="projects.html" class="hover:text-gray-300 transition-colors duration-200">Projects</a>
-        <a href="contact.html" class="hover:text-gray-300 transition-colors duration-200">Contact</a>
-      </div>
-      <button id="dark-mode-toggle" class="ml-4 p-2 text-white rounded shadow-md">☀️</button>
-    </div>
-  </nav>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>GM</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="projects.html" class="nav-link active">Projects</a>
+                <a href="cv.html" class="nav-link">CV</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
 
-  <div class="flex flex-col items-center justify-center min-h-screen">
-    <div id="projects-container" class="projects-container px-4 py-5 mt-8 space-y-4 w-full max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold mb-10">Projects</h1>
-      <div id="projects-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
-    </div>
-  </div>
+    <!-- Projects Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1 class="page-title">My Projects</h1>
+            <p class="page-subtitle">A showcase of my work in machine learning, web development, and game development</p>
+        </div>
+    </section>
 
-  <!-- Modal Details Panel -->
-  <div id="project-details-modal" class="hidden">
-    <div class="modal-content">
-      <button id="close-modal" class="modal-close">&times;</button>
-      <h2 id="modal-project-title" class="text-2xl font-bold mb-4"></h2>
-      <p id="modal-project-description"></p>
-    </div>
-  </div>
-  
-  <!-- External Scripts -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
-  <script type="text/javascript" src="JavaScript/particles.js"></script>
+    <!-- Projects Grid -->
+    <section class="projects">
+        <div class="container">
+            <div class="projects-grid">
+                <!-- Project 1: Anti Phishing Academy -->
+                <div class="project-card featured">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="project-badge">🏆 JacHacks Winner</div>
+                    </div>
+                    <h3 class="project-title">Anti Phishing Academy</h3>
+                    <p class="project-description">
+                        A comprehensive web application designed to educate employees on phishing attacks using machine learning techniques. 
+                        This project won the JacHacks hackathon and helps organizations improve their cybersecurity awareness.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">Web Development</span>
+                        <span class="tech-tag">Cybersecurity</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://devpost.com/software/anti-phishing-academy" target="_blank" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> View Project
+                        </a>
+                        <a href="https://github.com/Org0220" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
 
-  <!-- Configuration and Projects Script -->
-  <script src="JavaScript/config.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const projectsList = document.getElementById('projects-list');
-      
-      // Clear the list
-      projectsList.innerHTML = '';
+                <!-- Project 2: Tissue Classifier -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Tissue Classifier</h3>
+                    <p class="project-description">
+                        Self-supervised learning model for classifying different types of tissue using BYOL (Bootstrap Your Own Latent) 
+                        and PyTorch. This AI project demonstrates advanced machine learning techniques in medical image analysis.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">BYOL</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Computer Vision</span>
+                        <span class="tech-tag">Medical AI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Org0220" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
 
-      // Create each project card with a click listener for the details modal.
-      // This now uses the config object defined in config.js
-      if (config && config.projects) {
-        config.projects.forEach(project => {
-          const projectCard = document.createElement('div');
-          projectCard.className = 'project-card';
-          projectCard.innerHTML = `
-            ${project.image ? `<img src="${project.image}" alt="${project.title}" class="w-full rounded mb-2">` : ''}
-            <h2 class="text-xl font-bold">${project.title}</h2>
-            <p>${project.description}</p>
-            <a href="${project.link}" target="_blank" class="project-link">View Project</a>
-          `;
-          
-          // When the card is clicked, show the details panel.
-          projectCard.addEventListener('click', () => {
-            showProjectDetails(project);
-          });
-          
-          projectsList.appendChild(projectCard);
-        });
-      } else {
-        console.error("Config object or projects array not found");
-      }
-    });
+                <!-- Project 3: Facial Expression Classifier -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Facial Expression Classifier</h3>
+                    <p class="project-description">
+                        AI project focused on image recognition and neural networks for classifying facial expressions. 
+                        Utilizes Convolutional Neural Networks (CNN) and Scikit-learn for accurate emotion detection.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">CNN</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Image Recognition</span>
+                        <span class="tech-tag">Neural Networks</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Org0220" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
 
-    // Function to show the details modal with project information
-    function showProjectDetails(project) {
-      const modal = document.getElementById('project-details-modal');
-      const modalTitle = document.getElementById('modal-project-title');
-      const modalDescription = document.getElementById('modal-project-description');
+                <!-- Project 4: StalkStocks -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="project-badge">ConuHacks VIII</div>
+                    </div>
+                    <h3 class="project-title">StalkStocks</h3>
+                    <p class="project-description">
+                        Real-time financial dashboard displaying National Bank exchange statistics using interactive visualizations. 
+                        Built for ConuHacks VIII hackathon with modern web technologies and data visualization.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Plotly.js</span>
+                        <span class="tech-tag">Real-time Data</span>
+                        <span class="tech-tag">Financial APIs</span>
+                        <span class="tech-tag">Data Visualization</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Org0220" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
 
-      modalTitle.innerText = project.title;
-      modalDescription.innerText = project.detailed_description || 'No details available.';
-      modal.classList.remove('hidden');
-    }
+                <!-- Project 5: Smart Home Device -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Smart Home Device</h3>
+                    <p class="project-description">
+                        IoT project using Raspberry Pi and Python to create a smart home automation system. 
+                        Features include sensor monitoring, device control, and remote access capabilities.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Raspberry Pi</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">IoT</span>
+                        <span class="tech-tag">Home Automation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Org0220" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Close the modal when clicking the close button and on clicking outside the modal content.
-    document.addEventListener('DOMContentLoaded', () => {
-      const closeBtn = document.getElementById('close-modal');
-      closeBtn.addEventListener('click', () => {
-        document.getElementById('project-details-modal').classList.add('hidden');
-      });
-      document.getElementById('project-details-modal').addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) {
-          e.currentTarget.classList.add('hidden');
-        }
-      });
-    });
-  </script>
-  <script>
-    // Dark Mode and scroll behavior scripts
-    document.addEventListener("DOMContentLoaded", () => {
-      document.body.classList.add("dark-mode");
-      document.getElementById("dark-mode-toggle").innerText = "☀️";
-    });
-  
-    document.getElementById("dark-mode-toggle").addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-  
-      const toggleBtn = document.getElementById("dark-mode-toggle");
-      const taskbar = document.getElementById("taskbar");
-      const isDarkModeOn = document.body.classList.contains("dark-mode");
-  
-      toggleBtn.innerText = isDarkModeOn ? "☀️" : "🌓";
-      
-      if (isDarkModeOn) {
-        taskbar.classList.remove("light-mode");
-      } else {
-        taskbar.classList.add("light-mode");
-      }
-    });
-  
-    let lastScrollTop = 0;
-    const taskbar = document.getElementById("taskbar");
-  
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > lastScrollTop) {
-        taskbar.classList.add("hidden");
-      } else {
-        taskbar.classList.remove("hidden");
-      }
-      lastScrollTop = scrollTop;
-    });
-  </script>
-  
+    <!-- Professional Projects Section -->
+    <section class="professional-projects">
+        <div class="container">
+            <h2 class="section-title">Professional Experience Projects</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Sept 2024 - Present</div>
+                    <div class="timeline-content">
+                        <h3>DevOps Automation Tools - MDA Space</h3>
+                        <p>
+                            Developing automation tools using Jenkins, Docker containers and Python scripts. 
+                            Managing Linux servers, deploying applications, dealing with security protocols and certifications. 
+                            Creating VBA scripts for Microsoft-based UIs like Excel forms.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Jenkins</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Linux</span>
+                            <span class="tech-tag">VBA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2023 - May 2023</div>
+                    <div class="timeline-content">
+                        <h3>Tabclix PWA - Shooga Marketing</h3>
+                        <p>
+                            Developed a Progressive Web Application for creating business profiles with portfolios, contacts, 
+                            and shareable NFC business cards using React.js. Also optimized Laravel PHP API connecting Toronto's 
+                            E-bike database to SendInBlue (Brevo), reducing runtime from months to just over a day.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">PWA</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">API Optimization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://tabclix.com/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Live Site
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Oct 2022 - May 2023</div>
+                    <div class="timeline-content">
+                        <h3>Educational Games - John Abbott College</h3>
+                        <p>
+                            Developed 2 educational games using Unity engine for John Abbott's Biology and Chemistry departments 
+                            for student evaluation purposes. Used Firebase and SQLite for data storage. Created one game almost 
+                            entirely independently and developed one level for the second game.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Unity</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Game Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Gevorg Markarov. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/info.js"></script>
+    <script src="js/dataHandler.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
