@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -205,6 +206,71 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Hidden Keywords for ATS (Invisible on screen, visible in PDF) -->
+                <div class="hidden-keywords">
+                    <!-- Programming Languages & Frameworks -->
+                    React JavaScript TypeScript Node.js Python Java C# PHP Laravel Vue.js Angular Express.js Next.js Spring Boot Django Flask FastAPI
+                    
+                    <!-- DevOps & Cloud -->
+                    AWS Azure GCP Docker Kubernetes Jenkins CI/CD GitHub Actions GitLab CI Travis CI Terraform Ansible Chef Puppet
+                    
+                    <!-- Databases -->
+                    MySQL PostgreSQL MongoDB Redis Elasticsearch SQLite Firebase Firestore DynamoDB Oracle MariaDB
+                    
+                    <!-- Development Methodologies -->
+                    Agile Scrum Kanban DevOps Waterfall Test-Driven Development TDD Behavior-Driven Development BDD
+                    
+                    <!-- Web Technologies -->
+                    HTML5 CSS3 SASS SCSS Bootstrap Tailwind CSS jQuery REST API GraphQL WebSockets PWA Responsive Design
+                    
+                    <!-- Mobile Development -->
+                    React Native Flutter Android iOS Xamarin Ionic Cordova PhoneGap
+                    
+                    <!-- Data Science & AI -->
+                    Machine Learning Deep Learning TensorFlow PyTorch Scikit-learn Pandas NumPy Matplotlib Data Analysis Big Data
+                    
+                    <!-- Version Control & Tools -->
+                    Git GitHub GitLab Bitbucket SVN Mercurial VS Code IntelliJ Eclipse NetBeans Vim Emacs
+                    
+                    <!-- Operating Systems -->
+                    Linux Ubuntu CentOS RHEL Windows macOS Unix Shell Bash PowerShell Zsh
+                    
+                    <!-- Software Architecture -->
+                    Microservices Monolithic Architecture SOA Event-Driven Architecture Domain-Driven Design DDD SOLID Principles
+                    
+                    <!-- Testing -->
+                    Unit Testing Integration Testing End-to-End Testing Selenium Jest Mocha Chai Cypress JUnit TestNG
+                    
+                    <!-- Security -->
+                    OAuth JWT SSL/TLS HTTPS Encryption Authentication Authorization Penetration Testing Security Auditing
+                    
+                    <!-- Project Management -->
+                    Jira Confluence Trello Asana Monday.com Slack Microsoft Teams Zoom
+                    
+                    <!-- Business Intelligence -->
+                    Tableau Power BI Looker Grafana Kibana Data Visualization Analytics Reporting
+                    
+                    <!-- Emerging Technologies -->
+                    Blockchain Cryptocurrency Web3 IoT Artificial Intelligence Augmented Reality Virtual Reality
+                    
+                    <!-- Soft Skills Keywords -->
+                    Problem-solving Critical Thinking Team Collaboration Leadership Communication Cross-functional teams
+                    Mentoring Code Review Technical Documentation Requirements Analysis Stakeholder Management
+                    
+                    <!-- Industry Buzzwords -->
+                    Digital Transformation Innovation Scalability Performance Optimization Code Quality Best Practices
+                    Clean Code Refactoring Technical Debt Legacy Systems Modernization Migration
+                    
+                    <!-- Additional Technical Terms -->
+                    API Development RESTful Services SOAP XML JSON YAML Markdown
+                    Object-Oriented Programming Functional Programming Asynchronous Programming
+                    Multi-threading Concurrency Parallelism Design Patterns MVC MVP MVVM
+                    Debugging Profiling Monitoring Logging Error Handling Exception Handling
+                    
+                    <!-- Certifications & Standards -->
+                    ISO27001 GDPR PCI-DSS HIPAA SOX Compliance Accessibility WCAG Internationalization i18n
+                </div>
             </div>
         </div>
     </section>
@@ -217,13 +283,115 @@
     </footer>
 
     <script src="js/info.js"></script>
+    <script src="js/infoFR.js"></script>
     <script src="js/dataHandler.js"></script>
     <script src="js/script.js"></script>
     <script>
+        let contentLoaded = false;
+        
+        // Listen for content loaded event
+        document.addEventListener('cvContentLoaded', function(event) {
+            if (event.detail.currentPage === 'cv') {
+                contentLoaded = true;
+            }
+        });
+        
         function downloadCV() {
-            // Create a temporary link to trigger download of the current page as PDF
-            // Note: This is a placeholder. In a real implementation, you'd have a PDF file or use a PDF generation service
-            alert('PDF download functionality would be implemented here. You can use the Print option to save as PDF.');
+            // Show loading message
+            const button = event.target.closest('.btn');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+            button.disabled = true;
+            
+            function attemptDownload() {
+                try {
+                    // Get the CV paper element
+                    const element = document.querySelector('.cv-paper');
+                    
+                    // Check if content is loaded
+                    if (!contentLoaded) {
+                        // Wait a bit more for content to load
+                        setTimeout(attemptDownload, 500);
+                        return;
+                    }
+                    
+                    // Double-check that content is actually present
+                    const skillsContent = element.querySelector('.cv-skills');
+                    const contactContent = element.querySelector('.cv-contact');
+                    
+                    if (!skillsContent || !contactContent || 
+                        skillsContent.children.length === 0 || 
+                        contactContent.children.length === 0) {
+                        
+                        // Content still not loaded, wait a bit more
+                        setTimeout(attemptDownload, 500);
+                        return;
+                    }
+                    
+                    // Configure PDF options
+                    const opt = {
+                        margin: [0.5, 0.5, 0.5, 0.5],
+                        filename: 'Gevorg_Markarov_CV.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { 
+                            scale: 2,
+                            useCORS: true,
+                            letterRendering: true,
+                            allowTaint: false,
+                            backgroundColor: '#ffffff'
+                        },
+                        jsPDF: { 
+                            unit: 'in', 
+                            format: 'letter', 
+                            orientation: 'portrait',
+                            compress: true
+                        },
+                        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                    };
+                    
+                    // Generate and download PDF
+                    html2pdf().set(opt).from(element).save().then(() => {
+                        // Reset button
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                        
+                        // Show success notification
+                        if (typeof showNotification === 'function') {
+                            showNotification('CV downloaded successfully!', 'success');
+                        }
+                    }).catch((error) => {
+                        console.error('PDF generation failed:', error);
+                        
+                        // Reset button
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                        
+                        // Show error notification
+                        if (typeof showNotification === 'function') {
+                            showNotification('Failed to generate PDF. Please try again.', 'error');
+                        } else {
+                            alert('Failed to generate PDF. Please try again or use the Print option.');
+                        }
+                    });
+                    
+                } catch (error) {
+                    console.error('PDF generation setup failed:', error);
+                    
+                    // Reset button
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    
+                    // Show error notification
+                    if (typeof showNotification === 'function') {
+                        showNotification('Failed to generate PDF. Please try again.', 'error');
+                    } else {
+                        alert('Failed to generate PDF. Please try again or use the Print option.');
+                    }
+                }
+            }
+            
+            // Start the download attempt
+            attemptDownload();
         }
     </script>
 </body>

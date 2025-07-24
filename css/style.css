@@ -103,6 +103,89 @@ body {
     width: 100%;
 }
 
+/* Language Toggle */
+.language-toggle {
+    position: relative;
+    margin-left: 1rem;
+}
+
+.language-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: 1px solid var(--secondary-color);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: var(--transition);
+}
+
+.language-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.language-btn .fas {
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.language-toggle.show .language-btn .fas {
+    transform: rotate(180deg);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-primary);
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.language-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+}
+
+.language-option:last-child {
+    border-bottom: none;
+}
+
+.language-option:hover {
+    background: var(--bg-secondary);
+}
+
+.language-option.active {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color);
+}
+
+.language-option .flag {
+    font-size: 1.25rem;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -171,6 +254,14 @@ body {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.cv-button-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .hero-image {
@@ -329,7 +420,7 @@ body {
 
 .contact-links {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
 }
@@ -345,6 +436,16 @@ body {
     color: var(--text-primary);
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
+    min-width: 0; /* Allow flex items to shrink */
+    overflow: hidden;
+}
+
+.contact-link span {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    flex: 1;
+    min-width: 0;
 }
 
 .contact-link:hover {
@@ -743,20 +844,47 @@ body {
 
 .cv-contact {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.75rem;
+    align-items: start;
 }
 
 .contact-item {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.75rem;
     font-size: 0.9rem;
+    line-height: 1.4;
+    min-width: 0;
 }
 
 .contact-item i {
     color: var(--primary-color);
     width: 15px;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.contact-item span {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-item a {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-item a:hover {
+    color: var(--primary-color);
 }
 
 .cv-section {
@@ -841,6 +969,18 @@ body {
     padding: 2rem 0;
 }
 
+/* Tablet responsive adjustments */
+@media (max-width: 992px) {
+    .contact-links {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    
+    .cv-contact {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hamburger {
@@ -864,6 +1004,24 @@ body {
         left: 0;
     }
     
+    .language-toggle {
+        margin: 1rem 0;
+        align-self: center;
+    }
+    
+    .language-dropdown {
+        position: relative;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        margin-top: 0.5rem;
+    }
+    
+    .language-option {
+        justify-content: center;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+    }
+    
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -871,6 +1029,17 @@ body {
     
     .hero-title {
         font-size: 2.5rem;
+    }
+    
+    .cv-button-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .cv-button-group .btn {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0 !important;
     }
     
     .about-grid {
@@ -907,6 +1076,17 @@ body {
     .cv-contact {
         grid-template-columns: 1fr;
         text-align: left;
+        gap: 1rem;
+    }
+    
+    .contact-item {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    
+    .contact-item span,
+    .contact-item a {
+        word-break: break-all; /* More aggressive breaking on mobile */
     }
     
     .cv-item-header {
@@ -938,6 +1118,17 @@ body {
     
     .contact-links {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .contact-link {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .contact-link span {
+        word-break: break-all; /* More aggressive breaking on mobile */
+        line-height: 1.4;
     }
 }
 
@@ -985,4 +1176,46 @@ body {
     .contact-item a {
         color: #000 !important;
     }
+    
+    .cv-contact {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .contact-item {
+        font-size: 10px;
+        line-height: 1.3;
+        margin-bottom: 0.3rem;
+    }
+    
+    .contact-item span,
+    .contact-item a {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Hidden keywords visible in PDF */
+    .hidden-keywords {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 8px !important;
+        color: #000 !important;
+        line-height: 1.2 !important;
+    }
+}
+
+/* Hidden Keywords Section - Invisible on screen, visible in PDF */
+.hidden-keywords {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
 }

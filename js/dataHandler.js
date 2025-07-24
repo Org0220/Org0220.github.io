@@ -1,7 +1,8 @@
-// Data Handler - Populates all content dynamically from info.js
+// Data Handler - Populates all content dynamically from info.js with language support
 class DataHandler {
     constructor() {
-        this.data = personalInfo;
+        this.currentLanguage = localStorage.getItem('language') || 'en';
+        this.data = this.currentLanguage === 'fr' ? personalInfoFR : personalInfo;
         this.currentPage = this.getCurrentPage();
     }
 
@@ -13,12 +14,37 @@ class DataHandler {
         return 'home';
     }
 
+    switchLanguage(lang) {
+        this.currentLanguage = lang;
+        localStorage.setItem('language', lang);
+        this.data = lang === 'fr' ? personalInfoFR : personalInfo;
+        this.init();
+        this.updateLanguageToggle();
+    }
+
+    updateLanguageToggle() {
+        const languageToggle = document.querySelector('.language-toggle');
+        if (languageToggle) {
+            const currentFlag = languageToggle.querySelector('.current-flag');
+            const currentLang = languageToggle.querySelector('.current-lang');
+
+            if (this.currentLanguage === 'fr') {
+                currentFlag.textContent = '🇨🇦';
+                currentLang.textContent = 'FR';
+            } else {
+                currentFlag.textContent = '🇨🇦';
+                currentLang.textContent = 'EN';
+            }
+        }
+    }
+
     init() {
         this.setPageTitle();
         this.populateNavigation();
         this.populateFooter();
-        
-        switch(this.currentPage) {
+        this.updateLanguageToggle();
+
+        switch (this.currentPage) {
             case 'home':
                 this.populateHomePage();
                 break;
@@ -32,6 +58,14 @@ class DataHandler {
                 this.populateCVPage();
                 break;
         }
+
+        // Dispatch event to signal content is loaded
+        setTimeout(() => {
+            const event = new CustomEvent('cvContentLoaded', {
+                detail: { currentPage: this.currentPage }
+            });
+            document.dispatchEvent(event);
+        }, 100);
     }
 
     // Set page title and meta
@@ -39,7 +73,7 @@ class DataHandler {
         const pageData = this.data.pages[this.currentPage];
         if (pageData) {
             document.title = pageData.title;
-            
+
             // Set meta description
             let metaDesc = document.querySelector('meta[name="description"]');
             if (!metaDesc) {
@@ -61,21 +95,50 @@ class DataHandler {
                 link.href = item.url;
                 link.className = 'nav-link';
                 link.textContent = item.name;
-                
+
                 // Set active class
                 if ((this.currentPage === 'home' && item.url === 'index.html') ||
                     (this.currentPage !== 'home' && item.url.includes(this.currentPage))) {
                     link.classList.add('active');
                 }
-                
+
                 navMenu.appendChild(link);
             });
+
+            // Add language toggle
+            const languageToggle = document.createElement('div');
+            languageToggle.className = 'language-toggle';
+            languageToggle.innerHTML = `
+                <button class="language-btn" onclick="dataHandler.toggleLanguage()">
+                    <span class="current-flag">${this.currentLanguage === 'fr' ? '🇫🇷' : '🇨🇦'}</span>
+                    <span class="current-lang">${this.currentLanguage === 'fr' ? 'FR' : 'EN'}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown">
+                    <div class="language-option ${this.currentLanguage === 'en' ? 'active' : ''}" onclick="dataHandler.switchLanguage('en')">
+                        <span class="flag">🇨🇦</span>
+                        <span>English</span>
+                    </div>
+                    <div class="language-option ${this.currentLanguage === 'fr' ? 'active' : ''}" onclick="dataHandler.switchLanguage('fr')">
+                        <span class="flag">🇫🇷</span>
+                        <span>Français</span>
+                    </div>
+                </div>
+            `;
+            navMenu.appendChild(languageToggle);
         }
 
         // Set logo
         const navLogo = document.querySelector('.nav-logo h2');
         if (navLogo) {
             navLogo.textContent = this.data.personal.firstName.charAt(0) + this.data.personal.lastName.charAt(0);
+        }
+    }
+
+    toggleLanguage() {
+        const dropdown = document.querySelector('.language-dropdown');
+        if (dropdown) {
+            dropdown.classList.toggle('show');
         }
     }
 
@@ -315,8 +378,8 @@ class DataHandler {
             this.data.projects.forEach(project => {
                 const projectCard = document.createElement('div');
                 projectCard.className = `project-card ${project.featured ? 'featured' : ''}`;
-                
-                const techTags = project.technologies.map(tech => 
+
+                const techTags = project.technologies.map(tech =>
                     `<span class="tech-tag">${tech}</span>`
                 ).join('');
 
@@ -353,8 +416,8 @@ class DataHandler {
             this.data.experience.forEach(exp => {
                 const timelineItem = document.createElement('div');
                 timelineItem.className = 'timeline-item';
-                
-                const techTags = exp.technologies.map(tech => 
+
+                const techTags = exp.technologies.map(tech =>
                     `<span class="tech-tag">${tech}</span>`
                 ).join('');
 
@@ -549,15 +612,15 @@ class DataHandler {
     // Advanced typing animation method that handles HTML elements
     typeWriter(element, htmlContent, speed = 100) {
         element.innerHTML = '';
-        
+
         // Parse HTML content to separate text from HTML tags
         const parser = new DOMParser();
         const doc = parser.parseFromString(`<div>${htmlContent}</div>`, 'text/html');
         const container = doc.body.firstChild;
-        
+
         // Extract structure and text content
         const structure = [];
-        
+
         function parseNode(node, currentPath = []) {
             if (node.nodeType === Node.TEXT_NODE) {
                 const text = node.textContent;
@@ -575,19 +638,19 @@ class DataHandler {
                     attributes: {},
                     path: [...currentPath]
                 };
-                
+
                 // Store attributes
                 for (let attr of node.attributes) {
                     elementInfo.attributes[attr.name] = attr.value;
                 }
-                
+
                 structure.push(elementInfo);
-                
+
                 // Process children
                 for (let i = 0; i < node.childNodes.length; i++) {
                     parseNode(node.childNodes[i], [...currentPath, i]);
                 }
-                
+
                 // Add closing tag info
                 structure.push({
                     type: 'closeElement',
@@ -596,24 +659,24 @@ class DataHandler {
                 });
             }
         }
-        
+
         // Parse the container's children
         for (let i = 0; i < container.childNodes.length; i++) {
             parseNode(container.childNodes[i], [i]);
         }
-        
+
         // Create typing animation
         let currentIndex = 0;
         let currentTextIndex = 0;
         let currentStructureItem = null;
-        
+
         function type() {
             if (currentIndex >= structure.length) {
                 return; // Animation complete
             }
-            
+
             const item = structure[currentIndex];
-            
+
             if (item.type === 'element') {
                 // Create and append HTML element instantly
                 const attrs = Object.entries(item.attributes)
@@ -622,19 +685,19 @@ class DataHandler {
                 element.innerHTML += `<${item.tagName}${attrs ? ' ' + attrs : ''}>`;
                 currentIndex++;
                 setTimeout(type, 10); // Small delay for smooth rendering
-                
+
             } else if (item.type === 'closeElement') {
                 // Close HTML element instantly
                 element.innerHTML += `</${item.tagName}>`;
                 currentIndex++;
                 setTimeout(type, 10);
-                
+
             } else if (item.type === 'text') {
                 // Type text character by character
                 if (currentTextIndex === 0) {
                     currentStructureItem = item;
                 }
-                
+
                 if (currentTextIndex < item.content.length) {
                     element.innerHTML += item.content.charAt(currentTextIndex);
                     currentTextIndex++;
@@ -647,12 +710,25 @@ class DataHandler {
                 }
             }
         }
-        
+
         type();
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const dataHandler = new DataHandler();
+// Initialize global dataHandler
+let dataHandler;
+
+document.addEventListener('DOMContentLoaded', function () {
+    dataHandler = new DataHandler();
     dataHandler.init();
+
+    // Close language dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+        const languageToggle = document.querySelector('.language-toggle');
+        const dropdown = document.querySelector('.language-dropdown');
+
+        if (languageToggle && dropdown && !languageToggle.contains(event.target)) {
+            dropdown.classList.remove('show');
+        }
+    });
 });

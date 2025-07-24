@@ -16,14 +16,14 @@ const personalInfo = {
 
     hero: {
         greeting: "Hi, I'm",
-        description: "Passionate about solving algorithmic problems and building innovative solutions. Currently pursuing my Bachelor's in Computer Science at Concordia University with hands-on experience in DevOps, web development, and game development.",
+        description: "Passionate about solving algorithmic problems and building innovative solutions. Currently studying Computer Science at Concordia University while seeking research opportunities in AI and work career in DevOps or applied machine learning. Hands-on experience with CI/CD, web systems integration, and intelligent automation.",
         primaryButtonText: "View My Projects",
         primaryButtonLink: "projects.html",
         secondaryButtonText: "Download CV",
         secondaryButtonLink: "cv.html"
     },
 
-    summary: "I've always been interested in solving algorithmic problems and learning various programming tools from a young age. Following my passion, I pursued computer science at both Vanier and Concordia to further develop my skills. Despite the progress, my eagerness to learn and acquire more experience in the field persists. Consequently, my current goal is to secure an internship where I can participate in interesting projects and continue expanding my knowledge.",
+    summary: "I've always been fascinated by algorithmic thinking and modern AI systems. This led me to pursue Computer Science at Vanier and Concordia, where I combined academic learning with hands-on experience in DevOps, automation, and web development. I'm now actively looking to collaborate with a professor on a thesis in artificial intelligence development while also pursuing a work career in AI, DevOps, or intelligent systems. My drive to learn and innovate continues to grow as I look to contribute to impactful projects in these fields.",
 
     stats: [
         { number: "3.84", label: "GPA" },
@@ -66,8 +66,8 @@ const personalInfo = {
             company: "MDA Space",
             startDate: "September 2024",
             endDate: "Present",
-            description: "Developing automation tools using Jenkins, Docker containers and Python scripts. Managing Linux servers, deploying applications, dealing with security protocols and certifications. Creating VBA scripts for Microsoft based UIs like excel forms.",
-            technologies: ["Jenkins", "Docker", "Python", "Linux", "VBA"]
+            description: "Assisting the DevOps team with automation pipelines, CI/CD processes, and internal tool development. Designed and maintained Jenkins pipelines for building and deploying applications. Used Docker containers in automated workflows. Reverse engineered web requests of third-party apps to integrate data with internal systems. Created VBA scripts to enhance Excel-based UIs. Regularly used Jira for task tracking and Agile development planning.",
+            technologies: ["Jenkins", "Docker", "Python", "Linux", "VBA", "Jira", "CI/CD", "Web Reverse Engineering"]
         },
         {
             title: "Web Developer Intern",
@@ -155,7 +155,7 @@ const personalInfo = {
         {
             title: "DevOps & Tools",
             icon: "fas fa-server",
-            skills: ["Jenkins", "Docker", "Linux", "Git", "VS Code"]
+            skills: ["Jenkins", "Docker", "Linux", "Git", "Jira", "CI/CD Pipelines", "Web Request Debugging", "VS Code"]
         },
         {
             title: "Databases & More",
@@ -184,6 +184,11 @@ const personalInfo = {
             title: "Game Development",
             description: "Unity engine development for educational and entertainment purposes",
             icon: "fas fa-gamepad"
+        },
+        {
+            title: "DevOps Engineering",
+            description: "Hands-on experience with CI/CD, Jenkins pipeline automation, Jira workflows, and web traffic analysis for software integration.",
+            icon: "fas fa-cogs"
         }
     ],
 
@@ -191,8 +196,8 @@ const personalInfo = {
         languages: "English, French, Armenian and Russian",
         programmingLanguages: "Java, C#, HTML, CSS, JavaScript, PHP, Python, SQL, C, Clojure",
         frameworksAndTechnologies: "Node JS (Basics), Laravel, React JS, Jenkins, Docker, Unity, Firebase, SQLite",
-        toolsAndMethodologies: "Android Studio, Unity, VS Code, Git, Agile, Scrum and Waterfall methodologies",
-        coreCompetencies: "Strong understanding of different algorithms, data structures and code optimization"
+        toolsAndMethodologies: "Android Studio, Unity, VS Code, Git, Jira, CI/CD Pipelines, Agile, Scrum and Waterfall methodologies",
+        coreCompetencies: "Strong understanding of algorithms, data structures, DevOps pipeline automation, web request analysis, and code optimization"
     },
 
     socialLinks: [

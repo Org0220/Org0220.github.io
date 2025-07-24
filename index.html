@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -41,7 +42,12 @@
                     </p>
                     <div class="hero-buttons">
                         <a href="projects.html" class="btn btn-primary">View My Projects</a>
-                        <a href="cv.html" class="btn btn-secondary">Download CV</a>
+                        <div class="cv-button-group">
+                            <a href="cv.html" class="btn btn-secondary">View CV</a>
+                            <button onclick="downloadCVFromHome()" class="btn btn-secondary" style="margin-left: 0.5rem;">
+                                <i class="fas fa-download"></i> Download PDF
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -139,7 +145,147 @@
     </footer>
 
     <script src="js/info.js"></script>
+    <script src="js/infoFR.js"></script>
     <script src="js/dataHandler.js"></script>
     <script src="js/script.js"></script>
+    <script>
+        async function downloadCVFromHome() {
+            // Show loading message
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            button.disabled = true;
+            
+            try {
+                // Create a hidden iframe to load the CV page with all scripts
+                const iframe = document.createElement('iframe');
+                iframe.style.position = 'absolute';
+                iframe.style.left = '-9999px';
+                iframe.style.width = '1200px';
+                iframe.style.height = '800px';
+                iframe.src = 'cv.html';
+                document.body.appendChild(iframe);
+                
+                // Wait for iframe to load completely and content to be populated
+                await new Promise((resolve, reject) => {
+                    let contentLoaded = false;
+                    let loadTimeout;
+                    
+                    iframe.onload = () => {
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        
+                        // Listen for the content loaded event in the iframe
+                        iframeDoc.addEventListener('cvContentLoaded', function(event) {
+                            if (event.detail.currentPage === 'cv') {
+                                contentLoaded = true;
+                                clearTimeout(loadTimeout);
+                                // Give a little extra time to ensure everything is rendered
+                                setTimeout(resolve, 500);
+                            }
+                        });
+                        
+                        // Fallback: check periodically if content is loaded
+                        const checkContent = () => {
+                            const cvPaper = iframeDoc.querySelector('.cv-paper');
+                            const skillsContent = cvPaper?.querySelector('.cv-skills');
+                            const contactContent = cvPaper?.querySelector('.cv-contact');
+                            
+                            if (skillsContent && contactContent && 
+                                skillsContent.children.length > 0 && 
+                                contactContent.children.length > 0) {
+                                
+                                contentLoaded = true;
+                                clearTimeout(loadTimeout);
+                                resolve();
+                            } else if (!contentLoaded) {
+                                setTimeout(checkContent, 200);
+                            }
+                        };
+                        
+                        // Start checking after a short delay
+                        setTimeout(checkContent, 1000);
+                    };
+                    
+                    iframe.onerror = reject;
+                    
+                    // Timeout after 15 seconds
+                    loadTimeout = setTimeout(() => {
+                        if (!contentLoaded) {
+                            reject(new Error('Timeout loading CV content'));
+                        }
+                    }, 15000);
+                });
+                
+                // Get the CV paper content from the loaded iframe
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const cvPaper = iframeDoc.querySelector('.cv-paper');
+                
+                if (!cvPaper) {
+                    throw new Error('CV content not found after loading');
+                }
+                
+                // Clone the content to avoid issues with the iframe
+                const clonedContent = cvPaper.cloneNode(true);
+                
+                // Configure PDF options
+                const opt = {
+                    margin: [0.5, 0.5, 0.5, 0.5],
+                    filename: 'Gevorg_Markarov_CV.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        scale: 2,
+                        useCORS: true,
+                        letterRendering: true,
+                        allowTaint: false,
+                        backgroundColor: '#ffffff'
+                    },
+                    jsPDF: { 
+                        unit: 'in', 
+                        format: 'letter', 
+                        orientation: 'portrait',
+                        compress: true
+                    },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+                
+                // Generate and download PDF
+                await html2pdf().set(opt).from(clonedContent).save();
+                
+                // Clean up iframe
+                document.body.removeChild(iframe);
+                
+                // Show success notification
+                if (typeof showNotification === 'function') {
+                    showNotification('CV downloaded successfully!', 'success');
+                }
+                
+            } catch (error) {
+                console.error('PDF generation failed:', error);
+                
+                // Clean up iframe if it exists
+                const iframe = document.querySelector('iframe[src="cv.html"]');
+                if (iframe) {
+                    document.body.removeChild(iframe);
+                }
+                
+                // Show error notification with fallback option
+                if (typeof showNotification === 'function') {
+                    showNotification('Failed to generate PDF. Redirecting to CV page...', 'error');
+                } else {
+                    alert('Failed to generate PDF. Redirecting to CV page...');
+                }
+                
+                // Fallback: redirect to CV page
+                setTimeout(() => {
+                    window.open('cv.html', '_blank');
+                }, 1500);
+                
+            } finally {
+                // Reset button
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        }
+    </script>
 </body>
 </html>
