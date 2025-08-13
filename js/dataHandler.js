@@ -60,12 +60,10 @@ class DataHandler {
         }
 
         // Dispatch event to signal content is loaded
-        setTimeout(() => {
-            const event = new CustomEvent('cvContentLoaded', {
-                detail: { currentPage: this.currentPage }
-            });
-            document.dispatchEvent(event);
-        }, 100);
+        const event = new CustomEvent('cvContentLoaded', {
+            detail: { currentPage: this.currentPage }
+        });
+        document.dispatchEvent(event);
     }
 
     // Set page title and meta
@@ -452,12 +450,11 @@ class DataHandler {
             pageSubtitle.textContent = this.data.pages.cv.pageSubtitle;
         }
 
-        this.populateCVHeader();
-        this.populateCVSummary();
+        // Only populate dynamic sections, keep static sections (header, summary, skills) untouched
         this.populateCVEducation();
         this.populateCVExperience();
         this.populateCVProjects();
-        this.populateCVSkills();
+        // Removed header, summary and skills population to keep them static for printing
     }
 
     // Populate CV header
@@ -472,9 +469,9 @@ class DataHandler {
             cvTitle.textContent = this.data.personal.title;
         }
 
-        // CV contact info
+        // CV contact info - only populate if not marked as static
         const cvContact = document.querySelector('.cv-contact');
-        if (cvContact) {
+        if (cvContact && !cvContact.hasAttribute('data-static')) {
             cvContact.innerHTML = `
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
@@ -503,7 +500,7 @@ class DataHandler {
     // Populate CV summary
     populateCVSummary() {
         const cvSummary = document.querySelector('.cv-section p');
-        if (cvSummary) {
+        if (cvSummary && !cvSummary.hasAttribute('data-static')) {
             cvSummary.textContent = this.data.summary;
         }
     }
@@ -582,7 +579,8 @@ class DataHandler {
         const skillsSection = document.querySelectorAll('.cv-section')[4];
         if (skillsSection) {
             const cvSkills = skillsSection.querySelector('.cv-skills');
-            if (cvSkills) {
+            if (cvSkills && !cvSkills.hasAttribute('data-static')) {
+                // Only populate if not marked as static content
                 cvSkills.innerHTML = `
                     <div class="skill-category">
                         <h4>Languages</h4>

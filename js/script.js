@@ -78,6 +78,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const animatedElements = document.querySelectorAll('.skill-category, .stat-item, .project-card, .interest-item, .timeline-item, .contact-link');
 
     animatedElements.forEach(el => {
+        // Don't animate CV page skill categories to ensure they're visible for printing
+        if (el.classList.contains('skill-category') && el.closest('.cv-skills')) {
+            // Skip animation for CV skills - keep them visible
+            return;
+        }
+        
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
